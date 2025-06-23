@@ -1,64 +1,112 @@
-<!-- resources/views/transactions/index.blade.php -->
 @extends('layouts.app')
 
 @section('content')
-<div class="mb-4">
-    <h1 class="fw-bold">Transaksi Saya</h1>
-</div>
-
-@if($transactions->count() > 0)
-<div class="card">
-    <div class="card-body">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID Transaksi</th>
-                    <th>Tanggal</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($transactions as $transaction)
-                <tr>
-                    <td>#{{ $transaction->id }}</td>
-                    <td>{{ $transaction->created_at->format('d M Y H:i') }}</td>
-                    <td>Rp {{ number_format($transaction->total_amount, 0, ',', '.') }}</td>
-                    <td>
-                        @if($transaction->status == 'pending')
-                            <span class="badge bg-warning">Pending</span>
-                        @elseif($transaction->status == 'paid')
-                            <span class="badge bg-info">Menunggu Verifikasi</span>
-                        @elseif($transaction->status == 'completed')
-                            <span class="badge bg-success">Selesai</span>
-                        @else
-                            <span class="badge bg-danger">Dibatalkan</span>
-                        @endif
-                    </td>
-                    <td>
-                        <a href="{{ route('transactions.show', $transaction) }}" class="btn btn-sm btn-primary">
-                            <i class="bi bi-eye"></i> Detail
-                        </a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="mb-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-2">Riwayat Transaksi</h1>
+        <p class="text-gray-600">Lihat semua transaksi pembelian Anda</p>
     </div>
-</div>
-@else
-<div class="card">
-    <div class="card-body text-center py-5">
-        <i class="bi bi-receipt text-muted" style="font-size: 4rem;"></i>
-        <h3 class="mt-3">Belum Ada Transaksi</h3>
-        <p class="text-muted">Anda belum melakukan transaksi apapun</p>
-        <a href="{{ route('home') }}" class="btn btn-primary mt-3">Belanja Sekarang</a>
-    </div>
-</div>
-@endif
 
-<div class="d-flex justify-content-center mt-4">
-    {{ $transactions->links() }}
+    @if($transactions->count() > 0)
+        <div class="bg-white shadow-sm rounded-lg overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                ID Transaksi
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Tanggal
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Total
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Status
+                            </th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                Aksi
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        @foreach($transactions as $transaction)
+                            <tr class="hover:bg-gray-50">
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                    #{{ $transaction->id }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    {{ $transaction->created_at->format('d M Y H:i') }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-semibold text-blue-600">
+                                    Rp {{ number_format($transaction->total_amount, 0, ',', '.') }}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @switch($transaction->status)
+                                        @case('pending')
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                                                Menunggu Pembayaran
+                                            </span>
+                                            @break
+                                        @case('paid')
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                                Menunggu Verifikasi
+                                            </span>
+                                            @break
+                                        @case('completed')
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                                                Selesai
+                                            </span>
+                                            @break
+                                        @case('cancelled')
+                                            <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-red-100 text-red-800">
+                                                Dibatalkan
+                                            </span>
+                                            @break
+                                    @endswitch
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                                    <a href="{{ route('transactions.show', $transaction) }}"
+                                       class="text-blue-600 hover:text-blue-900 transition duration-150 ease-in-out">
+                                        Detail
+                                    </a>
+
+                                    @if($transaction->status === 'pending')
+                                        <a href="{{ route('payments.create', $transaction) }}"
+                                           class="text-green-600 hover:text-green-900 transition duration-150 ease-in-out">
+                                            Bayar
+                                        </a>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-6">
+            {{ $transactions->links() }}
+        </div>
+    @else
+        <!-- Empty State -->
+        <div class="text-center py-12">
+            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <h3 class="mt-2 text-sm font-medium text-gray-900">Belum ada transaksi</h3>
+            <p class="mt-1 text-sm text-gray-500">Mulai berbelanja untuk melihat riwayat transaksi Anda.</p>
+            <div class="mt-6">
+                <a href="{{ route('home') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    <svg class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253z" />
+                    </svg>
+                    Mulai Belanja
+                </a>
+            </div>
+        </div>
+    @endif
 </div>
 @endsection

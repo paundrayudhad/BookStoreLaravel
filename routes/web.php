@@ -9,9 +9,10 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', [BookController::class, 'index'])->name('home');
-
-
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/home', [BookController::class, 'index'])->name('home');
 
 // Authenticated user routes
 Route::middleware(['auth'])->group(function () {
@@ -41,5 +42,3 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
