@@ -75,7 +75,7 @@
                                     </form>
                                 @else
                                     <button disabled class="w-full bg-gray-300 text-gray-500 py-2 px-4 rounded-lg font-medium cursor-not-allowed">
-                                        Stok Habphis
+                                        Stok Habis
                                     </button>
                                 @endif
                             @else
