@@ -33,22 +33,26 @@
             @foreach($books as $book)
                 <div class="bg-white rounded-lg shadow-sm hover:shadow-md transition duration-300 ease-in-out overflow-hidden">
                     <!-- Book Cover -->
-                    <div class="aspect-w-3 aspect-h-4 bg-gray-200">
-                        @if($book->cover_image)
-                            <img src="{{ Storage::url($book->cover_image) }}" alt="{{ $book->title }}"
-                                 class="w-full h-64 object-cover">
-                        @else
-                            <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                                <svg class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253z" />
-                                </svg>
-                            </div>
-                        @endif
-                    </div>
+                    <a href="{{ route('books.show', $book) }}" class="block">
+                        <div class="aspect-w-3 aspect-h-4 bg-gray-200">
+                            @if($book->cover_image)
+                                <img src="{{ Storage::url($book->cover_image) }}" alt="{{ $book->title }}"
+                                     class="w-full h-64 object-cover hover:opacity-90 transition duration-150">
+                            @else
+                                <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center hover:opacity-90 transition duration-150">
+                                    <svg class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253z" />
+                                    </svg>
+                                </div>
+                            @endif
+                        </div>
+                    </a>
 
                     <!-- Book Info -->
                     <div class="p-4">
-                        <h3 class="font-semibold text-gray-900 text-lg mb-1 line-clamp-2">{{ $book->title }}</h3>
+                        <a href="{{ route('books.show', $book) }}" class="block hover:text-blue-600 transition duration-150">
+                            <h3 class="font-semibold text-gray-900 text-lg mb-1 line-clamp-2">{{ $book->title }}</h3>
+                        </a>
                         <p class="text-gray-600 text-sm mb-2">{{ $book->author }}</p>
 
                         @if($book->description)
@@ -62,6 +66,13 @@
 
                         <!-- Action Buttons -->
                         <div class="flex gap-2">
+                            <a href="{{ route('books.show', $book) }}" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium text-center transition duration-150 ease-in-out">
+                                <svg class="inline h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                </svg>
+                                Detail
+                            </a>
                             @auth
                                 @if($book->stock > 0)
                                     <form action="{{ route('cart.add', $book) }}" method="POST" class="flex-1">
