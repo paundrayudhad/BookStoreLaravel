@@ -1,6 +1,7 @@
 <?php
 
 // routes/web.php
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
@@ -9,9 +10,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
+
 Route::get('/home', [BookController::class, 'index'])->name('home');
 
 // Authenticated user routes
