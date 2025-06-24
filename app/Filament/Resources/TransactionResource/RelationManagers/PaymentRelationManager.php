@@ -27,11 +27,13 @@ class PaymentRelationManager extends RelationManager
                         'qris' => 'QRIS',
                     ])
                     ->required()
+                    ->disabled()
                     ->label('Metode Pembayaran'),
 
                 Forms\Components\FileUpload::make('proof')
                     ->label('Bukti Pembayaran')
                     ->image()
+                    ->disabled()
                     ->directory('payment-proofs')
                     ->required()
                     ->columnSpanFull(),

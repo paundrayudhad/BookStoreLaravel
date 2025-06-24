@@ -27,6 +27,7 @@ class DetailsRelationManager extends RelationManager
                     ->searchable()
                     ->preload()
                     ->required()
+                    ->disabled()
                     ->label('Buku'),
 
                 Forms\Components\TextInput::make('quantity')
@@ -34,11 +35,13 @@ class DetailsRelationManager extends RelationManager
                     ->numeric()
                     ->minValue(1)
                     ->default(1)
+                    ->disabled()
                     ->label('Jumlah'),
 
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
+                    ->disabled()
                     ->prefix('Rp')
                     ->label('Harga Satuan'),
             ]);
