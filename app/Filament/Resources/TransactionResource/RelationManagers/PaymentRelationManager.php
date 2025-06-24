@@ -95,10 +95,15 @@ class PaymentRelationManager extends RelationManager
                     ]),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->after(function ($record) {
+                        // When payment status is verified, update transaction status to completed
+                        if ($record->status === 'verified' && $record->transaction) {
+                            $record->transaction->update(['status' => 'completed']);
+                        }
+                    }),
                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
