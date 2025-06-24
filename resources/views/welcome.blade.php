@@ -15,7 +15,7 @@
             <p class="mt-6 max-w-3xl mx-auto text-xl text-blue-100">
                 Temukan ribuan buku digital berkualitas dengan harga terjangkau. Baca kapan saja, di mana saja dengan koleksi buku terlengkap.
             </p>
-            
+
             <!-- Dynamic Stats -->
             <div class="mt-10 grid grid-cols-2 gap-8 sm:grid-cols-3 max-w-lg mx-auto">
                 <div class="text-center">
@@ -122,12 +122,12 @@
                     <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2 relative">
                         <!-- Badge Ranking -->
                         <div class="absolute top-2 left-2 z-10">
-                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium 
+                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium
                                 @if($index < 3) bg-yellow-100 text-yellow-800 @else bg-blue-100 text-blue-800 @endif">
                                 #{{ $index + 1 }}
                             </span>
                         </div>
-                        
+
                         <div class="aspect-w-3 aspect-h-4">
                             @if($book->cover_image)
                                 <img src="{{ $book->cover_url }}" alt="{{ $book->title }}" class="w-full h-48 object-cover rounded-t-lg">

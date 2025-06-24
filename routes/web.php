@@ -7,12 +7,15 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BookDetailController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
 Route::get('/home', [BookController::class, 'index'])->name('home');
+// routes/web.php
+Route::get('/books/{book}', [BookDetailController::class, 'show'])->name('books.show');
 
 // Authenticated user routes
 Route::middleware(['auth'])->group(function () {

@@ -3,35 +3,47 @@
 // app/Models/Book.php
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'title',
+        'book_type',
         'author',
-        'description',
+        'publisher',
+        'release_year',
+        'category',
+        'tags',
+        'short_description',
+        'synopsis',
+        'isbn',
+        'page_count',
+        'weight',
+        'dimensions',
         'price',
         'stock',
         'cover_image',
-        'pdf_file',
+        'pdf_file'
     ];
 
-    public function details()
+    protected $casts = [
+        'tags' => 'array',
+    ];
+
+    public function getFormattedTagsAttribute()
     {
-        return $this->hasMany(TransactionDetail::class);
+        return $this->tags ? implode(', ', $this->tags) : '';
     }
 
-    public function getCoverUrlAttribute()
+    public function getPhysicalAttributesAttribute()
     {
-        return $this->cover_image ? asset('storage/'.$this->cover_image) : null;
-    }
+        if ($this->book_type !== 'fisik') return null;
 
-    public function getPdfUrlAttribute()
-    {
-        return $this->pdf_file ? asset('storage/'.$this->pdf_file) : null;
+        return [
+            'weight' => $this->weight ? $this->weight . ' gram' : '-',
+            'dimensions' => $this->dimensions ?: '-',
+            'page_count' => $this->page_count ?: '-'
+        ];
     }
 }
