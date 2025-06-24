@@ -10,11 +10,23 @@ use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
-    public function index()
-    {
-        $books = Book::where('stock', '>', 0)->paginate(12);
-        return view('books.index', compact('books'));
+    public function index(Request $request)
+{
+    $query = Book::where('stock', '>', 0);
+
+    if ($request->filled('search')) {
+        $search = $request->input('search');
+        $query->where(function ($q) use ($search) {
+            $q->where('title', 'like', "%{$search}%")
+              ->orWhere('author', 'like', "%{$search}%");
+        });
     }
+
+    $books = $query->paginate(12)->withQueryString();
+
+    return view('books.index', compact('books'));
+    }
+
 
     public function download(Book $book)
     {
