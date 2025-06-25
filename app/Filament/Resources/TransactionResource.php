@@ -44,6 +44,15 @@ class TransactionResource extends Resource
                         'cancelled' => 'Cancelled',
                     ])
                     ->required(),
+                Forms\Components\TextInput::make('recipient_name')
+                    ->required()
+                    ->disabled(),
+                Forms\Components\TextInput::make('shipping_address')
+                    ->required()
+                    ->disabled(),
+                Forms\Components\TextInput::make('phone_number')
+                    ->required()
+                    ->disabled(),
             ]);
     }
 
