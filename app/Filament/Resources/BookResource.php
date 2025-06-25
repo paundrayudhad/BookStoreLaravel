@@ -106,7 +106,8 @@ class BookResource extends Resource
                         Forms\Components\FileUpload::make('pdf_file')
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('book-pdfs')
-                            ->preserveFilenames(),
+                            ->preserveFilenames()
+                            ->visible(fn (Forms\Get $get) => $get('book_type') !== 'fisik'),
                     ]),
             ]);
     }

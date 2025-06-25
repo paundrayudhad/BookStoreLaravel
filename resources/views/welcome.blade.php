@@ -67,7 +67,7 @@
                     <div class="bg-white rounded-lg shadow-md hover:shadow-xl transition duration-300 ease-in-out transform hover:-translate-y-2">
                         <div class="aspect-w-3 aspect-h-4">
                             @if($book->cover_image)
-                                <img src="{{ $book->cover_url }}" alt="{{ $book->title }}" class="w-full h-48 object-cover rounded-t-lg">
+                                <img src="{{ Storage::url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-full object-cover rounded-t-lg">
                             @else
                                 <div class="w-full h-48 bg-gray-200 rounded-t-lg flex items-center justify-center">
                                     <svg class="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -130,7 +130,7 @@
 
                         <div class="aspect-w-3 aspect-h-4">
                             @if($book->cover_image)
-                                <img src="{{ $book->cover_url }}" alt="{{ $book->title }}" class="w-full h-48 object-cover rounded-t-lg">
+                                <img src="{{ Storage::url($book->cover_image) }}" alt="{{ $book->title }}" class="w-full h-48 object-cover rounded-t-lg">
                             @else
                                 <div class="w-full h-48 bg-gray-200 rounded-t-lg flex items-center justify-center">
                                     <svg class="w-12 h-12 text-gray-400" fill="currentColor" viewBox="0 0 20 20">

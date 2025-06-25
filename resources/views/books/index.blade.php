@@ -37,7 +37,7 @@
                         <div class="aspect-w-3 aspect-h-4 bg-gray-200">
                             @if($book->cover_image)
                                 <img src="{{ Storage::url($book->cover_image) }}" alt="{{ $book->title }}"
-                                     class="w-full h-64 object-cover hover:opacity-90 transition duration-150">
+                                     class="w-full h-full object-cover hover:opacity-90 transition duration-150">
                             @else
                                 <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center hover:opacity-90 transition duration-150">
                                     <svg class="h-16 w-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

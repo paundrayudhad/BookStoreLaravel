@@ -71,7 +71,7 @@
                             </div>
 
                             <!-- Download Button -->
-                            @if($transaction->status === 'completed')
+                            @if($transaction->status === 'completed' && $detail->book->file)
                                 <div class="flex-shrink-0">
                                     <a href="{{ route('books.download', $detail->book) }}"
                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150 ease-in-out">

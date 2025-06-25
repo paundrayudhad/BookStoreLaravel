@@ -72,11 +72,27 @@ class TransactionController extends Controller
         }
     }
 
-    public function index()
-    {
-        $transactions = Auth::user()->transactions()->latest()->paginate(10);
-        return view('transactions.index', compact('transactions'));
+    public function index(Request $request)
+{
+    $query = Auth::user()->transactions()->latest();
+
+    if ($request->filled('search')) {
+        $search = $request->input('search');
+        $query->where(function ($q) use ($search) {
+            $q->where('id', 'like', "%$search%")
+              ->orWhere('total_amount', 'like', "%$search%");
+        });
     }
+
+    if ($request->filled('status')) {
+        $query->where('status', $request->input('status'));
+    }
+
+    $transactions = $query->paginate(10)->withQueryString(); // penting agar filter tetap saat pagination
+
+    return view('transactions.index', compact('transactions'));
+}
+
 
     public function show(Transaction $transaction)
     {

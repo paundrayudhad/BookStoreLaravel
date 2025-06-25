@@ -6,6 +6,34 @@
         <h1 class="text-3xl font-bold text-gray-900 mb-2">Riwayat Transaksi</h1>
         <p class="text-gray-600">Lihat semua transaksi pembelian Anda</p>
     </div>
+    <!-- Filter Pintar -->
+<form method="GET" class="mb-6 flex flex-col md:flex-row md:items-end gap-4">
+    <div class="flex-1">
+        <label for="search" class="block text-sm font-medium text-gray-700">Cari ID atau Total</label>
+        <input type="text" name="search" id="search" value="{{ request('search') }}"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+               placeholder="Contoh: 123 atau 10000">
+    </div>
+
+    <div>
+        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+        <select name="status" id="status"
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+            <option value="">Semua</option>
+            <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu Pembayaran</option>
+            <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Menunggu Verifikasi</option>
+            <option value="completed" {{ request('status') == 'completed' ? 'selected' : '' }}>Selesai</option>
+            <option value="cancelled" {{ request('status') == 'cancelled' ? 'selected' : '' }}>Dibatalkan</option>
+        </select>
+    </div>
+
+    <div>
+        <button type="submit"
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+            Filter
+        </button>
+    </div>
+</form>
 
     @if($transactions->count() > 0)
         <div class="bg-white shadow-sm rounded-lg overflow-hidden">

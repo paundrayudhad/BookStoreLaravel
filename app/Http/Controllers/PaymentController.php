@@ -16,8 +16,11 @@ class PaymentController extends Controller
         if ($transaction->user_id !== Auth::id() || $transaction->status !== 'pending') {
             abort(403);
         }
+        $hasPhysicalBook = $transaction->details->contains(function ($detail) {
+            return $detail->book->book_type === 'fisik';
+        });
 
-        return view('payments.create', compact('transaction'));
+        return view('payments.create', compact('transaction', 'hasPhysicalBook'));
     }
 
     public function store(Request $request, Transaction $transaction)
@@ -26,6 +29,18 @@ class PaymentController extends Controller
             'payment_method' => 'required|in:bank_transfer,qris',
             'proof' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
+        $hasPhysicalBook = $transaction->details->contains(function ($detail) {
+            return $detail->book->book_type === 'fisik';
+        });
+
+        if ($hasPhysicalBook) { // Digunakan di sini
+            $request->validate([
+                'recipient_name' => 'required|string|max:255',
+                'shipping_address' => 'required|string',
+                'phone_number' => 'required|string|max:20',
+            ]);
+        }
+
 
         // Save proof image
         $path = $request->file('proof')->store('payment-proofs');
@@ -40,6 +55,9 @@ class PaymentController extends Controller
 
         // Update transaction status
         $transaction->status = 'paid';
+        $transaction->recipient_name = $request->recipient_name ?? null;
+        $transaction->shipping_address = $request->shipping_address ?? null;
+        $transaction->phone_number = $request->phone_number ?? null;
         $transaction->save();
 
         return redirect()->route('transactions.show', $transaction)

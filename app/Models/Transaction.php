@@ -12,6 +12,9 @@ class Transaction extends Model
 
     protected $fillable = [
         'user_id',
+        'recipient_name',
+        'shipping_address',
+        'phone_number',
         'total_amount',
         'status',
     ];

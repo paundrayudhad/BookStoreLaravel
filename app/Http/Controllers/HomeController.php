@@ -17,29 +17,29 @@ class HomeController extends Controller
         // Ambil statistik untuk hero section
         $totalBooks = Book::count();
         $totalAuthors = Book::distinct('author')->count();
-        
+
         // Ambil buku terbaru (berdasarkan created_at)
         $latestBooks = Book::orderBy('created_at', 'desc')
             ->take(6)
             ->get();
-        
+
         // Ambil buku terlaris (berdasarkan jumlah penjualan)
         // Asumsi: buku dengan stock paling sedikit adalah yang paling laris
         $bestSellerBooks = Book::orderBy('stock', 'asc')
             ->where('stock', '>', 0)
             ->take(6)
             ->get();
-        
+
         // Ambil buku dengan harga terendah untuk showcase
         $affordableBooks = Book::orderBy('price', 'asc')
             ->take(3)
             ->get();
 
         return view('welcome', compact(
-            'totalBooks', 
-            'totalAuthors', 
-            'latestBooks', 
-            'bestSellerBooks', 
+            'totalBooks',
+            'totalAuthors',
+            'latestBooks',
+            'bestSellerBooks',
             'affordableBooks'
         ));
     }
