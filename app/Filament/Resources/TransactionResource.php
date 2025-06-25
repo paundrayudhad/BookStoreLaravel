@@ -45,13 +45,10 @@ class TransactionResource extends Resource
                     ])
                     ->required(),
                 Forms\Components\TextInput::make('recipient_name')
-                    ->required()
                     ->disabled(),
                 Forms\Components\TextInput::make('shipping_address')
-                    ->required()
                     ->disabled(),
                 Forms\Components\TextInput::make('phone_number')
-                    ->required()
                     ->disabled(),
             ]);
     }
@@ -78,6 +75,14 @@ class TransactionResource extends Resource
             ])
             ->filters([
                 //
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'pending' => 'Pending',
+                        'paid' => 'Paid',
+                        'completed' => 'Completed',
+                        'cancelled' => 'Cancelled',
+                    ]),
+                
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

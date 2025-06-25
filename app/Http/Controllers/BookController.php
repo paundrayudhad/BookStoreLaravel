@@ -21,6 +21,10 @@ class BookController extends Controller
               ->orWhere('author', 'like', "%{$search}%");
         });
     }
+    if ($request->filled('format')){
+        $format = $request->input('format');
+        $query->where('book_type', $format);
+    }
 
     $books = $query->paginate(12)->withQueryString();
 

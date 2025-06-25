@@ -13,9 +13,17 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
-Route::get('/home', [BookController::class, 'index'])->name('home');
+Route::get('/home', [BookController::class, 'index'])->name('books.index');
 // routes/web.php
 Route::get('/books/{book}', [BookDetailController::class, 'show'])->name('books.show');
+// Static pages
+Route::get('/tentang-kami', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/kontak', function () {
+    return view('contact');
+})->name('contact');
 
 // Authenticated user routes
 Route::middleware(['auth'])->group(function () {

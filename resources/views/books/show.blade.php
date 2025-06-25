@@ -19,7 +19,7 @@
                     <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
                     </svg>
-                    <a href="{{ route('home') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2">Katalog</a>
+                    <a href="{{ route('books.index') }}" class="ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ml-2">Katalog</a>
                 </div>
             </li>
             <li aria-current="page">
@@ -39,8 +39,8 @@
             <!-- Book Cover -->
             <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-6">
                 @if($book->cover_image)
-                    <img src="{{ Storage::url($book->cover_image) }}" 
-                         alt="{{ $book->title }}" 
+                    <img src="{{ Storage::url($book->cover_image) }}"
+                         alt="{{ $book->title }}"
                          class="w-full h-auto object-cover">
                 @else
                     <div class="bg-gray-200 flex items-center justify-center" style="height: 500px;">
@@ -75,19 +75,6 @@
                         {{ $book->page_count }} halaman
                     </div>
                     @endif
-                    @auth
-                        @if($book->pdf_file)
-                        <a href="{{ route('books.download', $book) }}" 
-                           class="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center">
-                            <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-                            </svg>
-                            Download Sample
-                        </a>
-                        @endif
-                    @else
-                        <p class="text-sm text-gray-500 mt-4">Login untuk download sample</p>
-                    @endauth
                 </div>
             </div>
             @endif
@@ -189,7 +176,7 @@
                     <!-- Add to Cart Button -->
                     <form action="{{ route('cart.add', $book) }}" method="POST">
                         @csrf
-                        <button type="submit" 
+                        <button type="submit"
                                 class="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-200 flex items-center justify-center font-semibold {{ ($book->book_type === 'fisik' && $book->stock < 1) ? 'opacity-50 cursor-not-allowed' : '' }}"
                                 {{ ($book->book_type === 'fisik' && $book->stock < 1) ? 'disabled' : '' }}>
                             <svg class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -267,19 +254,6 @@
                 </div>
             </div>
 
-            <!-- Related Books Section (Optional) -->
-            <div class="mt-8">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Buku Terkait</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- You can add related books here later -->
-                    <div class="bg-white rounded-lg shadow p-4">
-                        <div class="bg-gray-200 h-48 rounded-lg mb-4"></div>
-                        <h3 class="font-semibold text-gray-900 mb-1">Judul Buku Terkait</h3>
-                        <p class="text-sm text-gray-600 mb-2">Nama Penulis</p>
-                        <p class="text-lg font-bold text-blue-600">Rp 85.000</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
@@ -309,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
         button.addEventListener('click', function() {
             const url = window.location.href;
             const title = '{{ $book->title }}';
-            
+
             switch(index) {
                 case 0: // Facebook
                     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
