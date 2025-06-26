@@ -116,9 +116,7 @@
     @else
         <!-- Empty Cart -->
         <div class="text-center py-12">
-            <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5H19M7 13v8a2 2 0 002 2h6a2 2 0 002-2v-8m-8 0V9a2 2 0 012-2h4a2 2 0 012 2v4.01" />
-            </svg>
+            <i data-lucide="shopping-cart" class="mx-auto h-12 w-12 text-gray-400"></i>
             <h3 class="mt-2 text-sm font-medium text-gray-900">Keranjang belanja kosong</h3>
             <p class="mt-1 text-sm text-gray-500">Mulai berbelanja untuk menambahkan item ke keranjang Anda.</p>
             <div class="mt-6">
