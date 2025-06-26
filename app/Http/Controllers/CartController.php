@@ -56,18 +56,24 @@ class CartController extends Controller
     }
 
     public function update(Request $request, Book $book)
-    {
-        $request->validate([
-            'quantity' => 'required|integer|min:1'
-        ]);
+{
+    $request->validate([
+        'quantity' => 'required|integer|min:1',
+    ]);
 
-        $cart = session()->get('cart', []);
-
-        if (isset($cart[$book->id])) {
-            $cart[$book->id]['quantity'] = $request->quantity;
-            session()->put('cart', $cart);
-        }
-
-        return redirect()->route('cart.index')->with('success', 'Jumlah buku diperbarui.');
+    // Cek apakah quantity melebihi stock
+    if ($request->quantity > $book->stock) {
+        return redirect()->route('cart.index')->with('error', 'Jumlah melebihi stok yang tersedia.');
     }
+
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$book->id])) {
+        $cart[$book->id]['quantity'] = $request->quantity;
+        session()->put('cart', $cart);
+    }
+
+    return redirect()->route('cart.index')->with('success', 'Jumlah buku diperbarui.');
+}
+
 }

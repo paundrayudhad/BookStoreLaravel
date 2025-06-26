@@ -1,75 +1,185 @@
 @extends('layouts.app')
 
+@section('title', 'Masuk - SabaJayaPress')
+
 @section('content')
-<div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8">
-        <div>
-            <div class="mx-auto h-12 w-12 flex items-center justify-center">
-                <svg class="h-12 w-12 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253z" />
-                </svg>
+<div class="min-h-screen bg-gradient-to-br from-orange-50 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full">
+        <!-- Logo and Header -->
+        <div class="text-center mb-8">
+            <div class="mx-auto h-16 w-16 bg-orange-600 rounded-full flex items-center justify-center mb-4">
+                <i data-lucide="book-open" class="h-8 w-8 text-white"></i>
             </div>
-            <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-                Masuk ke akun Anda
-            </h2>
-            <p class="mt-2 text-center text-sm text-gray-600">
-                Atau
-                <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">
-                    daftar akun baru
+            <h1 class="text-2xl font-bold text-orange-600 mb-2">SabaJayaPress</h1>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Masuk ke Akun Anda</h2>
+            <p class="text-sm text-gray-600">
+                Belum punya akun? 
+                <a href="{{ route('register') }}" class="font-medium text-orange-600 hover:text-orange-500 transition-colors">
+                    Daftar di sini
                 </a>
             </p>
         </div>
 
-        <form class="mt-8 space-y-6" method="POST" action="{{ route('login') }}">
-            @csrf
-            <div class="rounded-md shadow-sm -space-y-px">
-                <div>
-                    <label for="email" class="sr-only">Email address</label>
-                    <input id="email" name="email" type="email" autocomplete="email" required
-                           class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm @error('email') border-red-300 @enderror"
-                           placeholder="Email address" value="{{ old('email') }}">
-                    @error('email')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+        <!-- Login Form -->
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            @if(session('status'))
+                <div class="mb-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
+                    {{ session('status') }}
                 </div>
-                <div>
-                    <label for="password" class="sr-only">Password</label>
-                    <input id="password" name="password" type="password" autocomplete="current-password" required
-                           class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm @error('password') border-red-300 @enderror"
-                           placeholder="Password">
-                    @error('password')
-                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
-                </div>
-            </div>
+            @endif
 
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <input id="remember_me" name="remember" type="checkbox"
-                           class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                    <label for="remember_me" class="ml-2 block text-sm text-gray-900">
-                        Ingat saya
+            @if(session('error'))
+                <div class="mb-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('login') }}" class="space-y-6">
+                @csrf
+
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i data-lucide="mail" class="h-4 w-4 inline mr-1"></i>
+                        Alamat Email
                     </label>
+                    <input 
+                        id="email" 
+                        name="email" 
+                        type="email" 
+                        autocomplete="email" 
+                        required
+                        value="{{ old('email') }}"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 @error('email') border-red-500 ring-2 ring-red-200 @enderror"
+                        placeholder="Masukkan email Anda"
+                    >
+                    @error('email')
+                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                            <i data-lucide="alert-circle" class="h-4 w-4 mr-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
 
-                <div class="text-sm">
-                    <a href="{{ route('password.request') }}" class="font-medium text-blue-600 hover:text-blue-500">
-                        Lupa password?
-                    </a>
+                <!-- Password Field -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                        <i data-lucide="lock" class="h-4 w-4 inline mr-1"></i>
+                        Password
+                    </label>
+                    <div class="relative">
+                        <input 
+                            id="password" 
+                            name="password" 
+                            type="password" 
+                            autocomplete="current-password" 
+                            required
+                            class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all duration-200 @error('password') border-red-500 ring-2 ring-red-200 @enderror"
+                            placeholder="Masukkan password Anda"
+                        >
+                        <button 
+                            type="button" 
+                            onclick="togglePassword('password')"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                        >
+                            <i data-lucide="eye" class="h-5 w-5" id="password-eye"></i>
+                        </button>
+                    </div>
+                    @error('password')
+                        <p class="mt-2 text-sm text-red-600 flex items-center">
+                            <i data-lucide="alert-circle" class="h-4 w-4 mr-1"></i>
+                            {{ $message }}
+                        </p>
+                    @enderror
                 </div>
-            </div>
 
-            <div>
-                <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                        <svg class="h-5 w-5 text-blue-500 group-hover:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                        </svg>
-                    </span>
-                    Masuk
+                <!-- Remember Me and Forgot Password -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input 
+                            id="remember" 
+                            name="remember" 
+                            type="checkbox"
+                            {{ old('remember') ? 'checked' : '' }}
+                            class="h-4 w-4 text-orange-600 focus:ring-orange-500 border-gray-300 rounded"
+                        >
+                        <label for="remember" class="ml-2 block text-sm text-gray-700">
+                            Ingat saya
+                        </label>
+                    </div>
+
+                    <div class="text-sm">
+                        <a href="{{ route('password.request') }}" class="font-medium text-orange-600 hover:text-orange-500 transition-colors">
+                            Lupa password?
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button 
+                    type="submit" 
+                    class="w-full bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+                >
+                    <i data-lucide="log-in" class="h-5 w-5"></i>
+                    <span>Masuk</span>
                 </button>
+            </form>
+
+            
+        </div>
+
+        <!-- Quick Access -->
+        <div class="mt-6 bg-white rounded-lg shadow p-4">
+            <h3 class="text-sm font-medium text-gray-900 mb-3">Akses Cepat</h3>
+            <div class="grid grid-cols-2 gap-3 text-sm">
+                <a href="{{ route('books.index') }}" class="flex items-center text-gray-600 hover:text-orange-600 transition-colors">
+                    <i data-lucide="book" class="h-4 w-4 mr-2"></i>
+                    Katalog Buku
+                </a>
+                <a href="{{ route('about') }}" class="flex items-center text-gray-600 hover:text-orange-600 transition-colors">
+                    <i data-lucide="info" class="h-4 w-4 mr-2"></i>
+                    Tentang Kami
+                </a>
+                <a href="{{ route('contact') }}" class="flex items-center text-gray-600 hover:text-orange-600 transition-colors">
+                    <i data-lucide="phone" class="h-4 w-4 mr-2"></i>
+                    Kontak
+                </a>
+                <a href="#" class="flex items-center text-gray-600 hover:text-orange-600 transition-colors">
+                    <i data-lucide="help-circle" class="h-4 w-4 mr-2"></i>
+                    Bantuan
+                </a>
             </div>
-        </form>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-8">
+            <p class="text-xs text-gray-500">
+                © 2024 SabaJayaPress. Semua hak dilindungi.
+            </p>
+        </div>
     </div>
 </div>
+
+@push('scripts')
+<script>
+    function togglePassword(fieldId) {
+        const field = document.getElementById(fieldId);
+        const eye = document.getElementById(fieldId + '-eye');
+        
+        if (field.type === 'password') {
+            field.type = 'text';
+            eye.setAttribute('data-lucide', 'eye-off');
+        } else {
+            field.type = 'password';
+            eye.setAttribute('data-lucide', 'eye');
+        }
+        
+        lucide.createIcons();
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+    });
+</script>
+@endpush
 @endsection

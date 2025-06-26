@@ -16,15 +16,15 @@
             <div class="lg:col-span-1">
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <div class="text-center mb-6">
-                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="user" class="h-10 w-10 text-blue-500"></i>
+                        <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="user" class="h-10 w-10 text-orange-500"></i>
                         </div>
                         <h3 class="font-semibold text-lg">{{ Auth::user()->name }}</h3>
                         <p class="text-gray-600 text-sm">{{ Auth::user()->email }}</p>
                     </div>
 
                     <nav class="space-y-2">
-                        <a href="{{ route('profile.show') }}" class="flex items-center px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg">
+                        <a href="{{ route('profile.show') }}" class="flex items-center px-3 py-2 text-sm font-medium text-orange-600 bg-orange-50 rounded-lg">
                             <i data-lucide="user" class="h-4 w-4 mr-3"></i>
                             Informasi Profil
                         </a>
@@ -55,7 +55,7 @@
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-gray-600">Total Belanja</span>
-                        <span class="font-semibold text-blue-600">
+                        <span class="font-semibold text-orange-600">
                             Rp {{ number_format(Auth::user()->transactions->where('status', 'completed')->sum('total_amount'), 0, ',', '.') }}
                         </span>
                     </div>
@@ -80,7 +80,7 @@
                                     id="name"
                                     value="{{ Auth::user()->name }}"
                                     name="name"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-500 @enderror"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent @error('name') border-red-500 @enderror"
                                     required
                                 >
                                 @error('name')
@@ -94,7 +94,7 @@
                                     type="password"
                                     id="current_password"
                                     name="current_password"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('current_password') border-red-500 @enderror"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent @error('current_password') border-red-500 @enderror"
                                     required
                                 >
                                 @error('current_password')
@@ -109,7 +109,7 @@
                                         type="password"
                                         id="password"
                                         name="password"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('password') border-red-500 @enderror"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent @error('password') border-red-500 @enderror"
                                         required
                                     >
                                     @error('password')
@@ -123,7 +123,7 @@
                                         type="password"
                                         id="password_confirmation"
                                         name="password_confirmation"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                                         required
                                     >
                                 </div>

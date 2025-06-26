@@ -46,16 +46,17 @@
             <div class="border-t border-gray-200 pt-4">
                 <div class="flex justify-between text-lg font-bold">
                     <span>Total Pembayaran</span>
-                    <span class="text-blue-600">Rp {{ number_format($transaction->total_amount, 0, ',', '.') }}</span>
+                    <span class="text-orange-600">Rp {{ number_format($transaction->total_amount, 0, ',', '.') }}</span>
                 </div>
             </div>
         </div>
-        
+
         <div class="bg-white rounded-lg shadow-sm p-6">
             <form action="{{ route('payments.store', $transaction) }}" method="POST" enctype="multipart/form-data" id="payment-form">
                 @csrf
                 <input type="hidden" name="payment_method" id="payment_method_input" value="bank_transfer">
 
+                {{-- Step 1: Pengiriman --}}
                 <div id="step-1" class="step @if(!$hasPhysicalBook) hidden @endif">
                     <h2 class="text-xl font-semibold text-gray-900 mb-2">Langkah 1: Informasi Pengiriman</h2>
                     <p class="text-gray-600 mb-6">Harap isi detail pengiriman karena pesanan Anda mengandung buku fisik.</p>
@@ -63,7 +64,7 @@
                     <div class="mb-4">
                         <label for="recipient_name" class="block text-sm font-medium text-gray-700 mb-1">Nama Penerima</label>
                         <input type="text" id="recipient_name" name="recipient_name" value="{{ old('recipient_name', auth()->user()->name) }}" required
-                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 @error('recipient_name') border-red-500 @enderror">
+                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 @error('recipient_name') border-red-500 @enderror">
                         @error('recipient_name')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -72,7 +73,7 @@
                     <div class="mb-4">
                         <label for="shipping_address" class="block text-sm font-medium text-gray-700 mb-1">Alamat Pengiriman</label>
                         <textarea id="shipping_address" name="shipping_address" rows="3" required
-                                class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 @error('shipping_address') border-red-500 @enderror">{{ old('shipping_address') }}</textarea>
+                                class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 @error('shipping_address') border-red-500 @enderror">{{ old('shipping_address') }}</textarea>
                         @error('shipping_address')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
@@ -80,24 +81,25 @@
 
                     <div class="mb-4">
                         <label for="phone_number" class="block text-sm font-medium text-gray-700 mb-1">Nomor Telepon</label>
-                        <input type="text" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" required
-                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 @error('phone_number') border-red-500 @enderror">
+                        <input type="number" id="phone_number" name="phone_number" value="{{ old('phone_number') }}" required
+                            class="w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 @error('phone_number') border-red-500 @enderror">
                         @error('phone_number')
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-                    
-                    <button type="button" id="next-step-btn" class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition duration-150 ease-in-out">
+
+                    <button type="button" id="next-step-btn" class="w-full mt-4 bg-orange-600 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-semibold transition duration-150 ease-in-out">
                         Lanjut ke Pembayaran
                     </button>
                 </div>
 
+                {{-- Step 2: Metode Pembayaran --}}
                 <div id="step-2" class="step @if($hasPhysicalBook) hidden @endif">
                     <h2 class="text-xl font-semibold text-gray-900 mb-4">Langkah 2: Pilih Pembayaran</h2>
 
                     @if(!$hasPhysicalBook)
-                    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-                        <p class="text-blue-700 flex items-start">
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
+                        <p class="text-orange-700 flex items-start">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
                             </svg>
@@ -119,25 +121,24 @@
                         </div>
                     </div>
 
-                    <div class="mb-6 p-4 bg-blue-50 rounded-lg min-h-[120px]">
-                        <h3 class="text-sm font-medium text-blue-900 mb-2">Instruksi Pembayaran:</h3>
-                        <div id="bank_transfer-content" class="tab-content text-sm text-blue-800">
+                    <div class="mb-6 p-4 bg-orange-50 rounded-lg min-h-[120px]">
+                        <h3 class="text-sm font-medium text-orange-900 mb-2">Instruksi Pembayaran:</h3>
+                        <div id="bank_transfer-content" class="tab-content text-sm text-orange-800">
                              <p class="mb-2"><strong>Bank BCA:</strong></p>
                              <p>No. Rekening: 1234567890</p>
                              <p>Atas Nama: BookStore Indonesia</p>
                              <p class="mt-2 text-xs">Transfer sesuai nominal yang tertera dan upload bukti pembayaran.</p>
                         </div>
-                        <div id="qris-content" class="tab-content text-sm text-blue-800 hidden">
+                        <div id="qris-content" class="tab-content text-sm text-orange-800 hidden">
                              <p class="mb-2"><strong>QRIS Payment:</strong></p>
                              <p>Scan QR Code menggunakan aplikasi mobile banking atau e-wallet Anda.</p>
-                             <img src="https://placehold.jp/150x150.png?text=QRIS&css=%7B%22font-size%22%3A%2220px%22%7D" 
-     alt="QRIS Placeholder" 
-     class="my-4 w-48 mx-auto rounded border" />
-
+                             <img src="https://placehold.jp/150x150.png?text=QRIS&css=%7B%22font-size%22%3A%2220px%22%7D"
+                                alt="QRIS Placeholder"
+                                class="my-4 w-48 mx-auto rounded border" />
                              <p class="mt-2 text-xs">Setelah pembayaran berhasil, upload screenshot bukti pembayaran.</p>
                         </div>
                     </div>
-                    
+
                     <div class="mb-6">
                         <label for="proof" class="block text-sm font-medium text-gray-700 mb-2">
                             Upload Bukti Pembayaran
@@ -148,7 +149,7 @@
                                     <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
                                 <div class="flex text-sm text-gray-600">
-                                    <label for="proof" class="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500">
+                                    <label for="proof" class="relative cursor-pointer bg-white rounded-md font-medium text-orange-600 hover:text-orange-500">
                                         <span>Upload file</span>
                                         <input id="proof" name="proof" type="file" accept="image/*" class="sr-only" required>
                                     </label>
@@ -158,12 +159,13 @@
                             </div>
                         </div>
                         @error('proof')
-                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
+
                         <div id="preview-container" class="mt-4 hidden">
-                        <p class="text-sm text-gray-600 mb-2">Preview Bukti Pembayaran:</p>
-                        <img id="preview-image" class="max-w-xs rounded shadow-md mx-auto" alt="Preview Bukti" />
-                    </div>
+                            <p class="text-sm text-gray-600 mb-2">Preview Bukti Pembayaran:</p>
+                            <img id="preview-image" class="max-w-xs rounded shadow-md mx-auto" alt="Preview Bukti" />
+                        </div>
                     </div>
 
                     <div class="flex items-center space-x-4">
@@ -172,7 +174,7 @@
                             Kembali
                         </button>
                         @endif
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition duration-150 ease-in-out">
+                        <button type="submit" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-semibold transition duration-150 ease-in-out">
                             Konfirmasi Pembayaran
                         </button>
                     </div>
@@ -183,120 +185,75 @@
 </div>
 
 <style>
-    /* Menambahkan beberapa style untuk tab yang aktif dan non-aktif */
     .tab-button {
         @apply whitespace-nowrap py-3 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300;
     }
     .active-tab {
-        @apply border-blue-600 text-blue-600;
+        @apply border-orange-600 text-orange-600;
     }
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Kondisi dari Blade untuk JS
+document.addEventListener('DOMContentLoaded', function () {
     const hasPhysicalBook = {{ $hasPhysicalBook ? 'true' : 'false' }};
-
     const step1 = document.getElementById('step-1');
     const step2 = document.getElementById('step-2');
     const nextBtn = document.getElementById('next-step-btn');
     const prevBtn = document.getElementById('prev-step-btn');
-
     const tabButtons = document.querySelectorAll('.tab-button');
     const tabContents = document.querySelectorAll('.tab-content');
     const paymentMethodInput = document.getElementById('payment_method_input');
     const form = document.getElementById('payment-form');
 
     function showStep(step) {
-    if (step === 1) {
-        step1.classList.remove('hidden');
-        step2.classList.add('hidden');
-        // Aktifkan field step 1
-        step1.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
-        step2.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
-    } else {
-        step1.classList.add('hidden');
-        step2.classList.remove('hidden');
-        // Nonaktifkan field step 1 agar tidak divalidasi
-        step1.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
-        step2.querySelectorAll('input, textarea, select').forEach(el => el.disabled = false);
-    }
-}
-
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function () {
-            showStep(2);
-        });
+        if (step === 1) {
+            step1.classList.remove('hidden');
+            step2.classList.add('hidden');
+        } else {
+            step1.classList.add('hidden');
+            step2.classList.remove('hidden');
+        }
     }
 
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function () {
-            showStep(1);
-        });
-    }
+    if (nextBtn) nextBtn.addEventListener('click', () => showStep(2));
+    if (prevBtn) prevBtn.addEventListener('click', () => showStep(1));
 
-    // Tab Payment Handler
     tabButtons.forEach(button => {
         button.addEventListener('click', function () {
             const method = this.dataset.method;
-
-            // Set hidden input
             paymentMethodInput.value = method;
-
-            // Style tab aktif
             tabButtons.forEach(btn => btn.classList.remove('active-tab'));
             this.classList.add('active-tab');
-
-            // Tampilkan konten tab
             tabContents.forEach(content => {
-                if (content.id === method + '-content') {
-                    content.classList.remove('hidden');
-                } else {
-                    content.classList.add('hidden');
-                }
+                content.classList.toggle('hidden', content.id !== method + '-content');
             });
         });
     });
 
-    // Validasi final saat submit
     form.addEventListener('submit', function (e) {
-        const method = paymentMethodInput.value;
-        const validMethods = ['bank_transfer', 'qris'];
-
-        if (!validMethods.includes(method)) {
+        paymentMethodInput.value = paymentMethodInput.value || 'bank_transfer';
+        if (!['bank_transfer', 'qris'].includes(paymentMethodInput.value)) {
             e.preventDefault();
             alert('Silakan pilih metode pembayaran yang valid.');
         }
     });
 
-    // Inisialisasi tampilan awal
+    // Preview upload
+    document.getElementById('proof').addEventListener('change', function () {
+        const file = this.files[0];
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('preview-image').src = e.target.result;
+                document.getElementById('preview-container').classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Init
     showStep(hasPhysicalBook ? 1 : 2);
     document.querySelector('.tab-button[data-method="bank_transfer"]').click();
 });
 </script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const proofInput = document.getElementById('proof');
-        const previewContainer = document.getElementById('preview-container');
-        const previewImage = document.getElementById('preview-image');
-
-        proofInput.addEventListener('change', function () {
-            const file = this.files[0];
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    previewImage.src = e.target.result;
-                    previewContainer.classList.remove('hidden');
-                };
-                reader.readAsDataURL(file);
-            } else {
-                previewImage.src = '';
-                previewContainer.classList.add('hidden');
-            }
-        });
-    });
-</script>
-
 @endsection

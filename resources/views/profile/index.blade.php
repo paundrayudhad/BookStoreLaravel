@@ -16,15 +16,15 @@
             <div class="lg:col-span-1">
                 <div class="bg-white rounded-lg shadow-md p-6">
                     <div class="text-center mb-6">
-                        <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i data-lucide="user" class="h-10 w-10 text-blue-500"></i>
+                        <div class="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="user" class="h-10 w-10 text-orange-500"></i>
                         </div>
                         <h3 class="font-semibold text-lg">{{ Auth::user()->name }}</h3>
                         <p class="text-gray-600 text-sm">{{ Auth::user()->email }}</p>
                     </div>
 
                     <nav class="space-y-2">
-                        <a href="{{ route('profile.show') }}" class="flex items-center px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg">
+                        <a href="{{ route('profile.show') }}" class="flex items-center px-3 py-2 text-sm font-medium text-orange-600 bg-orange-50 rounded-lg">
                             <i data-lucide="user" class="h-4 w-4 mr-3"></i>
                             Informasi Profil
                         </a>
@@ -67,7 +67,7 @@
                                         id="name"
                                         name="name"
                                         value="{{ old('name', Auth::user()->name) }}"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-500 @enderror"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent @error('name') border-red-500 @enderror"
                                         required
                                     >
                                     @error('name')
@@ -82,7 +82,7 @@
                                         id="email"
                                         name="email"
                                         value="{{ old('email', Auth::user()->email) }}"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('email') border-red-500 @enderror"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent @error('email') border-red-500 @enderror"
                                         required
                                     >
                                     @error('email')
@@ -98,7 +98,7 @@
                                     id="phone"
                                     name="phone"
                                     value="{{ old('phone', Auth::user()->phone) }}"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                                     placeholder="+62 812-3456-7890"
                                 >
                             </div>
@@ -109,13 +109,13 @@
                                     id="address"
                                     name="address"
                                     rows="3"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                                     placeholder="Masukkan alamat lengkap Anda"
                                 >{{ old('address', Auth::user()->address) }}</textarea>
                             </div>
 
                             <div class="flex justify-end">
-                                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
+                                <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg font-medium transition-colors">
                                     Simpan Perubahan
                                 </button>
                             </div>
@@ -141,7 +141,7 @@
                                     type="password"
                                     id="current_password"
                                     name="current_password"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('current_password') border-red-500 @enderror"
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent @error('current_password') border-red-500 @enderror"
                                     required
                                 >
                                 @error('current_password')
@@ -156,7 +156,7 @@
                                         type="password"
                                         id="password"
                                         name="password"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('password') border-red-500 @enderror"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent @error('password') border-red-500 @enderror"
                                         required
                                     >
                                     @error('password')
@@ -170,7 +170,7 @@
                                         type="password"
                                         id="password_confirmation"
                                         name="password_confirmation"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                                         required
                                     >
                                 </div>

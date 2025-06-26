@@ -18,5 +18,11 @@ class PaymentObserver
                 $payment->transaction->update(['status' => 'completed']);
             }
         }
+        if ($payment->isDirty('status') && $payment->status === 'rejected') {
+            // Update the related transaction status to completed
+            if ($payment->transaction) {
+                $payment->transaction->update(['status' => 'cancelled']);
+            }
+        }
     }
 }

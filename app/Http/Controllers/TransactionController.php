@@ -88,7 +88,7 @@ class TransactionController extends Controller
         $query->where('status', $request->input('status'));
     }
 
-    $transactions = $query->paginate(10)->withQueryString(); // penting agar filter tetap saat pagination
+    $transactions = $query->paginate(5)->withQueryString(); // penting agar filter tetap saat pagination
 
     return view('transactions.index', compact('transactions'));
 }

@@ -20,7 +20,7 @@
                             <i data-lucide="user" class="h-4 w-4 mr-3"></i>
                             Informasi Profil
                         </a>
-                        <a href="{{ route('transactions.index') }}" class="flex items-center px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 rounded-lg">
+                        <a href="{{ route('transactions.index') }}" class="flex items-center px-3 py-2 text-sm font-medium text-orange-600 bg-orange-50 rounded-lg">
                             <i data-lucide="shopping-bag" class="h-4 w-4 mr-3"></i>
                             Riwayat Pembelian
                         </a>
@@ -37,14 +37,14 @@
     <div class="flex-1">
         <label for="search" class="block text-sm font-medium text-gray-700">Cari ID atau Total</label>
         <input type="text" name="search" id="search" value="{{ request('search') }}"
-               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500 sm:text-sm"
                placeholder="Contoh: 123 atau 10000">
     </div>
 
     <div>
         <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
         <select name="status" id="status"
-                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-orange-500 focus:border-orange-500 sm:text-sm">
             <option value="">Semua</option>
             <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>Menunggu Pembayaran</option>
             <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>Menunggu Verifikasi</option>
@@ -55,7 +55,7 @@
 
     <div>
         <button type="submit"
-                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none">
+                class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-orange-600 hover:bg-orange-700 focus:outline-none">
             Filter
         </button>
     </div>
@@ -80,7 +80,7 @@
                                                 Menunggu Pembayaran
                                             </span>
                                         @elseif($order->status == 'paid')
-                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
                                                 <i data-lucide="package" class="h-3 w-3 mr-1"></i>
                                                 Menunggu Verifikasi
                                             </span>
@@ -132,7 +132,7 @@
                                     </div>
                                     <div class="flex space-x-2">
                                         @if($order->status == 'pending')
-                                            <a href="{{ route('payments.create', $order) }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                            <a href="{{ route('payments.create', $order) }}" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
                                                 Bayar Sekarang
                                             </a>
                                         @endif
@@ -160,7 +160,7 @@
                         </div>
                         <h3 class="text-xl font-semibold mb-2">Belum Ada Pembelian</h3>
                         <p class="text-gray-600 mb-6">Anda belum melakukan pembelian apapun. Mulai jelajahi koleksi buku kami!</p>
-                        <a href="{{ route('books.index') }}" class="inline-flex items-center bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                        <a href="{{ route('books.index') }}" class="inline-flex items-center bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors">
                             <i data-lucide="book-open" class="h-5 w-5 mr-2"></i>
                             Jelajahi Buku
                         </a>

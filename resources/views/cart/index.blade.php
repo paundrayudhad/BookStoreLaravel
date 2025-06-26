@@ -25,7 +25,7 @@
                                         <img src="{{ Storage::url($details['cover']) }}" alt="{{ $details['title'] }}"
                                              class="h-20 w-16 object-cover rounded">
                                     @else
-                                        <div class="h-20 w-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded flex items-center justify-center">
+                                        <div class="h-20 w-16 bg-gradient-to-br from-orange-400 to-orange-600 rounded flex items-center justify-center">
                                             <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253z" />
                                             </svg>
@@ -37,7 +37,7 @@
                                 <div class="flex-1 min-w-0">
                                     <h3 class="text-lg font-semibold text-gray-900">{{ $details['title'] }}</h3>
                                     <p class="text-sm text-gray-600">{{ $details['author'] }}</p>
-                                    <p class="text-lg font-bold text-blue-600 mt-1">Rp {{ number_format($details['price'], 0, ',', '.') }}</p>
+                                    <p class="text-lg font-bold text-orange-600 mt-1">Rp {{ number_format($details['price'], 0, ',', '.') }}</p>
                                 </div>
 
                                 <!-- Quantity Controls -->
@@ -47,8 +47,8 @@
                                         <label for="quantity-{{ $id }}" class="sr-only">Jumlah</label>
                                         <input type="number" id="quantity-{{ $id }}" name="quantity" value="{{ $details['quantity'] }}"
                                                min="1" max="10"
-                                               class="w-16 px-2 py-1 border border-gray-300 rounded text-center focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                        <button type="submit" class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                                               class="w-16 px-2 py-1 border border-gray-300 rounded text-center focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                                        <button type="submit" class="text-orange-600 hover:text-orange-800 text-sm font-medium">
                                             Update
                                         </button>
                                     </form>
@@ -88,7 +88,7 @@
                     <div class="border-t border-gray-200 pt-4">
                         <div class="flex justify-between text-lg font-bold">
                             <span>Total</span>
-                            <span class="text-blue-600">Rp {{ number_format($total, 0, ',', '.') }}</span>
+                            <span class="text-orange-600">Rp {{ number_format($total, 0, ',', '.') }}</span>
                         </div>
                     </div>
 
@@ -96,12 +96,12 @@
                         @auth
                             <form action="{{ route('checkout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition duration-150 ease-in-out">
+                                <button type="submit" class="w-full bg-orange-600 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-semibold transition duration-150 ease-in-out">
                                     Checkout
                                 </button>
                             </form>
                         @else
-                            <a href="{{ route('login') }}" class="block w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold text-center transition duration-150 ease-in-out">
+                            <a href="{{ route('login') }}" class="block w-full bg-orange-600 hover:bg-orange-700 text-white py-3 px-4 rounded-lg font-semibold text-center transition duration-150 ease-in-out">
                                 Login untuk Checkout
                             </a>
                         @endauth
@@ -122,7 +122,7 @@
             <h3 class="mt-2 text-sm font-medium text-gray-900">Keranjang belanja kosong</h3>
             <p class="mt-1 text-sm text-gray-500">Mulai berbelanja untuk menambahkan item ke keranjang Anda.</p>
             <div class="mt-6">
-                <a href="{{ route('books.index') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <a href="{{ route('books.index') }}" class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500">
                     <svg class="-ml-1 mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253z" />
                     </svg>

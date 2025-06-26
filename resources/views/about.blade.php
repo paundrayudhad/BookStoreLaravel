@@ -4,14 +4,14 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-r from-blue-50 to-indigo-100 py-20 px-4">
+<section class="relative bg-gradient-to-r from-orange-50 to-indigo-100 py-20 px-4">
     <div class="container mx-auto text-center">
         <div class="max-w-4xl mx-auto space-y-6">
-            <div class="inline-flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-blue-600 mb-4">
+            <div class="inline-flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-orange-600 mb-4">
                 📖 Tentang SabaJayaPress
             </div>
             <h1 class="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Penerbit <span class="text-blue-500">Terpercaya</span>
+                Penerbit <span class="text-orange-500">Terpercaya</span>
                 <br>
                 untuk Masa Depan
             </h1>
@@ -65,8 +65,8 @@
         <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div class="bg-white rounded-lg shadow-md p-8">
                 <div class="text-center space-y-4">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                        <i data-lucide="target" class="h-8 w-8 text-blue-500"></i>
+                    <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto">
+                        <i data-lucide="target" class="h-8 w-8 text-orange-500"></i>
                     </div>
                     <h3 class="text-2xl font-bold">Misi Kami</h3>
                     <p class="text-gray-600 leading-relaxed">
@@ -105,7 +105,7 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
                 <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i data-lucide="book-open" class="h-8 w-8 text-blue-500"></i>
+                    <i data-lucide="book-open" class="h-8 w-8 text-orange-500"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-2">Kualitas Terbaik</h3>
                 <p class="text-gray-600 text-sm leading-relaxed">Kami berkomitmen menyediakan buku-buku berkualitas tinggi dari penerbit terpercaya.</p>
@@ -139,7 +139,7 @@
 </section>
 
 <!-- Achievements -->
-<section class="py-20 px-4 bg-blue-500 text-white">
+<section class="py-20 px-4 bg-orange-500 text-white">
     <div class="container mx-auto text-center">
         <h2 class="text-3xl lg:text-4xl font-bold mb-12">Pencapaian Kami</h2>
 
@@ -173,7 +173,7 @@
             terlupakan
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="{{ route('books.index') }}" class="bg-blue-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-600 transition-colors">
+            <a href="{{ route('books.index') }}" class="bg-orange-500 text-white px-8 py-3 rounded-lg font-medium hover:bg-orange-600 transition-colors">
                 Mulai Berbelanja
             </a>
             <a href="{{ route('contact') }}" class="border border-gray-300 px-8 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors">

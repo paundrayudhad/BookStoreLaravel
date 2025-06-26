@@ -4,14 +4,14 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-r from-blue-50 to-indigo-100 py-20 px-4">
+<section class="relative bg-gradient-to-r from-orange-50 to-indigo-100 py-20 px-4">
     <div class="container mx-auto text-center">
         <div class="max-w-4xl mx-auto space-y-6">
-            <div class="inline-flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-blue-600 mb-4">
+            <div class="inline-flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium text-orange-600 mb-4">
                 📞 Hubungi Kami
             </div>
             <h1 class="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                Kami Siap <span class="text-blue-500">Membantu</span>
+                Kami Siap <span class="text-orange-500">Membantu</span>
                 <br>
                 Anda
             </h1>
@@ -29,7 +29,7 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div class="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-lg transition-shadow">
                 <div class="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i data-lucide="map-pin" class="h-6 w-6 text-blue-500"></i>
+                    <i data-lucide="map-pin" class="h-6 w-6 text-orange-500"></i>
                 </div>
                 <h3 class="text-xl font-semibold mb-2">Alamat Kantor</h3>
                 <div class="space-y-1 text-sm text-gray-600">
@@ -146,7 +146,7 @@
 
         <div class="text-center mt-12">
             <p class="text-gray-600 mb-4">Tidak menemukan jawaban yang Anda cari?</p>
-            <button class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center mx-auto">
+            <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center mx-auto">
                 <i data-lucide="message-circle" class="mr-2 h-4 w-4"></i>
                 Hubungi Customer Service
             </button>

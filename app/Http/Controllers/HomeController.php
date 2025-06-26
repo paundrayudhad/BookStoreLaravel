@@ -22,7 +22,7 @@ class HomeController extends Controller
 
         // Ambil buku terbaru (berdasarkan created_at)
         $latestBooks = Book::orderBy('created_at', 'desc')
-            ->take(6)
+            ->take(4)
             ->get();
 
         // Ambil buku terlaris (berdasarkan jumlah penjualan)
@@ -31,7 +31,7 @@ class HomeController extends Controller
                 ->join('transaction_details', 'books.id', '=', 'transaction_details.book_id')
                 ->groupBy('books.id')
                 ->orderByDesc('total_sold')
-                ->take(6)
+                ->take(4)
                 ->get();
 
         // Ambil buku dengan harga terendah untuk showcase
