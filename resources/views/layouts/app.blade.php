@@ -54,20 +54,29 @@
                 <!-- Desktop Actions -->
                 <div class="hidden md:flex items-center space-x-2">
                     @auth
-                        <div class="relative">
-                            <a href=" {{ route('profile.show') }} " class="flex items-center space-x-2 text-sm font-medium">
-                                <i data-lucide="user" class="h-5 w-5"></i>
-                                <span>{{ Auth::user()->name }}</span>
-                            </a>
+                        <div class="relative inline-block text-left">
+                    <div>
+                        <button type="button" id="dropdownButton" onclick="toggleDropdown()" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                            {{ Auth::user()->name }}
+                            <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="dropdownMenu" class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden z-50">
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
+                            <a href="{{ route('profile.show') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Profile</a>
+                            <a href="{{ route('transactions.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Riwayat Pembelian</a>
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                                class="block px-4 py-2 text-sm text-red-600 hover:bg-red-100" role="menuitem">Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                                @csrf
+                            </form>
                         </div>
-                        <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                        class="text-sm font-medium text-red-600 hover:text-red-800">
-                            Logout
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
-                            @csrf
-                        </form>
+                    </div>
+                </div>
                     @else
                         <a href="{{ route('login') }}" class="text-sm font-medium hover:text-blue-500">Login</a>
                         <a href="{{ route('register') }}" class="bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-600">
@@ -84,31 +93,35 @@
 
             <!-- Mobile Menu -->
             <div class="md:hidden hidden" id="mobile-menu">
-                <div class="px-4 py-2 space-y-2 bg-white border-t">
-                    <a href="{{ route('welcome') }}" class="block py-2 text-sm font-medium">Beranda</a>
-                    <a href="{{ route('books.index') }}" class="block py-2 text-sm font-medium">Katalog</a>
-                    <a href="{{ route('about') }}" class="block py-2 text-sm font-medium">Tentang Kami</a>
-                    <a href="{{ route('contact') }}" class="block py-2 text-sm font-medium">Kontak</a>
-                    @auth
-                        <div class="border-t pt-2">
-                            <span class="block py-2 text-sm font-medium">{{ Auth::user()->name }}</span>
-                            <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();"
-                            class="block py-2 text-sm font-medium text-red-600">
-                                Logout
-                            </a>
-                            <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" class="hidden">
-                                @csrf
-                            </form>
-                        </div>
-                    @else
-                        <div class="border-t pt-2 space-y-2">
-                            <a href="{{ route('login') }}" class="block py-2 text-sm font-medium">Login</a>
-                            <a href="{{ route('register') }}" class="block py-2 text-sm font-medium bg-blue-500 text-white rounded px-3">Register</a>
-                        </div>
-                    @endauth
-                </div>
-            </div>
+    <div class="px-4 py-2 space-y-2 bg-white border-t">
+        <a href="{{ route('welcome') }}" class="block py-2 text-sm font-medium">Beranda</a>
+        <a href="{{ route('books.index') }}" class="block py-2 text-sm font-medium">Katalog</a>
+        <a href="{{ route('about') }}" class="block py-2 text-sm font-medium">Tentang Kami</a>
+        <a href="{{ route('contact') }}" class="block py-2 text-sm font-medium">Kontak</a>
+
+        @auth
+        <div class="border-t pt-2 space-y-1">
+            <span class="block py-2 text-sm font-semibold text-gray-800">{{ Auth::user()->name }}</span>
+            <a href="{{ route('profile.show') }}" class="block py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">Profil</a>
+            <a href="{{ route('transactions.index') }}" class="block py-2 text-sm text-gray-700 hover:bg-gray-100 rounded">Riwayat Pembelian</a>
+            <a href="{{ route('logout') }}"
+               onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();"
+               class="block py-2 text-sm font-medium text-red-600 hover:bg-red-100 rounded">
+               Logout
+            </a>
+            <form id="logout-form-mobile" action="{{ route('logout') }}" method="POST" class="hidden">
+                @csrf
+            </form>
+        </div>
+        @else
+        <div class="border-t pt-2 space-y-2">
+            <a href="{{ route('login') }}" class="block py-2 text-sm font-medium">Login</a>
+            <a href="{{ route('register') }}" class="block py-2 text-sm font-medium bg-blue-500 text-white rounded px-3">Register</a>
+        </div>
+        @endauth
+    </div>
+</div>
+
         </nav>
 <!-- Flash Messages -->
     @if(session('success'))
@@ -162,7 +175,7 @@
         </div>
     @endif
         <!-- Main Content -->
-        <main>
+        <main class="container mx-auto px-4">
             @yield('content')
         </main>
 
@@ -225,6 +238,21 @@
                 mobileMenu.classList.toggle('hidden');
             });
         </script>
+        <script>
+    function toggleDropdown() {
+        const menu = document.getElementById('dropdownMenu');
+        menu.classList.toggle('hidden');
+    }
+
+    // Optional: close dropdown when clicking outside
+    document.addEventListener('click', function (event) {
+        const dropdown = document.getElementById('dropdownMenu');
+        const button = document.getElementById('dropdownButton');
+        if (!button.contains(event.target) && !dropdown.contains(event.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+</script>
 
         @stack('scripts')
     </body>

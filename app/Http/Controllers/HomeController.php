@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\TransactionDetail;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -25,10 +27,12 @@ class HomeController extends Controller
 
         // Ambil buku terlaris (berdasarkan jumlah penjualan)
         // Asumsi: buku dengan stock paling sedikit adalah yang paling laris
-        $bestSellerBooks = Book::orderBy('stock', 'asc')
-            ->where('stock', '>', 0)
-            ->take(6)
-            ->get();
+        $bestSellerBooks = Book::select('books.*', DB::raw('SUM(transaction_details.quantity) as total_sold'))
+                ->join('transaction_details', 'books.id', '=', 'transaction_details.book_id')
+                ->groupBy('books.id')
+                ->orderByDesc('total_sold')
+                ->take(6)
+                ->get();
 
         // Ambil buku dengan harga terendah untuk showcase
         $affordableBooks = Book::orderBy('price', 'asc')

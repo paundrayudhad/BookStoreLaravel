@@ -26,7 +26,6 @@
                             Cari Buku
                         </label>
                         <div class="relative">
-                            <i data-lucide="search" class="absolute left-3 top-3 h-4 w-4 text-gray-400"></i>
                             <input
                                 type="text"
                                 id="search"

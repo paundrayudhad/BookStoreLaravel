@@ -46,4 +46,9 @@ class Book extends Model
             'page_count' => $this->page_count ?: '-'
         ];
     }
+
+    public function transactionDetails()
+{
+    return $this->hasMany(TransactionDetail::class);
+}
 }

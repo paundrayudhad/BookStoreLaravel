@@ -79,10 +79,10 @@
                                                 <i data-lucide="clock" class="h-3 w-3 mr-1"></i>
                                                 Menunggu Pembayaran
                                             </span>
-                                        @elseif($order->status == 'processing')
+                                        @elseif($order->status == 'paid')
                                             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                                 <i data-lucide="package" class="h-3 w-3 mr-1"></i>
-                                                Diproses
+                                                Menunggu Verifikasi
                                             </span>
                                         @elseif($order->status == 'completed')
                                             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -132,9 +132,9 @@
                                     </div>
                                     <div class="flex space-x-2">
                                         @if($order->status == 'pending')
-                                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+                                            <a href="{{ route('payments.create', $order) }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
                                                 Bayar Sekarang
-                                            </button>
+                                            </a>
                                         @endif
                                         <a href="{{ route('transactions.show', $order->id) }}" class="border border-gray-300 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-medium transition-colors">
                                             Lihat Detail

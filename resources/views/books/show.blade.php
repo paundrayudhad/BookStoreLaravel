@@ -204,7 +204,7 @@
                 @endif
 
                 <!-- Physical Book Attributes -->
-                @if($book->book_type === 'fisik')
+                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <div class="bg-gray-50 rounded-lg p-4 text-center">
                         <svg class="w-8 h-8 mx-auto mb-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -213,6 +213,7 @@
                         <p class="text-sm text-gray-600">Halaman</p>
                         <p class="text-lg font-semibold text-gray-900">{{ $book->page_count ?: '-' }}</p>
                     </div>
+                    @if($book->book_type === 'fisik')
                     <div class="bg-gray-50 rounded-lg p-4 text-center">
                         <svg class="w-8 h-8 mx-auto mb-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
@@ -220,6 +221,7 @@
                         <p class="text-sm text-gray-600">Berat</p>
                         <p class="text-lg font-semibold text-gray-900">{{ $book->weight ? $book->weight . ' gram' : '-' }}</p>
                     </div>
+                    
                     <div class="bg-gray-50 rounded-lg p-4 text-center">
                         <svg class="w-8 h-8 mx-auto mb-2 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
@@ -227,8 +229,9 @@
                         <p class="text-sm text-gray-600">Ukuran</p>
                         <p class="text-lg font-semibold text-gray-900">{{ $book->dimensions ?: '-' }}</p>
                     </div>
+                    @endif
                 </div>
-                @endif
+                
 
                 <!-- Book Details Table -->
                 <div class="border-t pt-6">

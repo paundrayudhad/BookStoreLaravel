@@ -119,7 +119,7 @@
                         <span class="text-lg font-bold text-blue-500">Rp {{ number_format($book->price, 0, ',', '.') }}</span>
                     </div>
                     <p class="text-sm text-gray-600 line-clamp-2">{{ $book->description }}</p>
-                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg font-medium transition-colors mt-3">
+                    <button onClick="window.location.href='{{ route('books.show', $book) }}'" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg font-medium transition-colors mt-3">
                         Lihat Detail
                     </button>
                 </div>
@@ -172,7 +172,7 @@
                         <span class="text-lg font-bold text-blue-500">Rp {{ number_format($book->price, 0, ',', '.') }}</span>
                     </div>
                     <p class="text-sm text-gray-600 line-clamp-2">{{ $book->description }}</p>
-                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg font-medium transition-colors mt-3">
+                    <button onClick="window.location.href='{{ route('books.show', $book) }}'" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-lg font-medium transition-colors mt-3">
                         Lihat Detail
                     </button>
                 </div>
@@ -182,29 +182,6 @@
     </div>
 </section>
 @endif
-
-<!-- Newsletter Section -->
-<section class="py-16 px-4 bg-blue-500 text-white">
-    <div class="container mx-auto text-center">
-        <h2 class="text-3xl font-bold mb-4">Dapatkan Update Terbaru</h2>
-        <p class="text-xl mb-8 opacity-90">
-            Berlangganan newsletter untuk mendapatkan info buku terbaru dan promo menarik
-        </p>
-        <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-            @csrf
-            <input
-                type="email"
-                name="email"
-                placeholder="Masukkan email Anda"
-                class="flex-1 px-4 py-3 rounded-lg text-gray-900"
-                required
-            >
-            <button type="submit" class="bg-white text-blue-500 px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                Berlangganan
-            </button>
-        </form>
-    </div>
-</section>
 
 @push('scripts')
 <script>

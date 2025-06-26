@@ -159,6 +159,12 @@
                             Bayar Sekarang
                         </a>
                     @endif
+                    @if($transaction->status === 'paid')
+                        <a href="https://wa.me/6287739964722?text=Halo, saya ingin mengonfirmasi pembayaran untuk transaksi #{{ $transaction->id }}. Terima kasih!"
+                           class="block w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium text-center transition duration-150 ease-in-out">
+                            Konfirmasi Pembayaran
+                        </a>
+                    @endif
 
                     <a href="{{ route('transactions.index') }}"
                        class="block w-full bg-gray-200 hover:bg-gray-300 text-gray-700 py-2 px-4 rounded-lg font-medium text-center transition duration-150 ease-in-out">

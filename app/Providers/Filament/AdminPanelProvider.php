@@ -19,6 +19,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Widgets\StatsOverview;
+use App\Filament\Widgets\TransactionChart;
+use App\Filament\Widgets\BookTypeSalesChart;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -41,7 +43,10 @@ class AdminPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
+                TransactionChart::class,
                 StatsOverview::class,
+                BookTypeSalesChart::class,
+                
             ])
             ->middleware([
                 EncryptCookies::class,

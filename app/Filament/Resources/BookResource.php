@@ -155,7 +155,13 @@ class BookResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->visible(fn (Book $record) => $record->transactionDetails()->count() === 0)
+                ->before(function (Book $record) {
+                    if ($record->transactionDetails()->exists()) {
+                        throw new \Exception('Buku ini sudah digunakan dalam transaksi dan tidak dapat dihapus.');
+                    }
+                }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

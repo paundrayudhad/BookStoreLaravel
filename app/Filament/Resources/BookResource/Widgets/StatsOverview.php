@@ -13,7 +13,7 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         // Menghitung total pendapatan dari transaksi yang berhasil
-        $totalRevenue = Transaction::where('status', 'success')->sum('total');
+        $totalRevenue = Transaction::where('status', 'completed')->sum('total_amount');
 
         return [
             Stat::make('Total Pengguna', User::count())

@@ -78,158 +78,31 @@
     </div>
 </section>
 
-<!-- Contact Form & Map -->
 <section class="py-20 px-4 bg-gray-50">
-    <div class="container mx-auto">
-        <div class="grid lg:grid-cols-2 gap-12">
-            <!-- Contact Form -->
-            <div>
-                <div class="bg-white rounded-lg shadow-md">
-                    <div class="p-6 border-b">
-                        <h2 class="text-2xl font-bold">Kirim Pesan</h2>
-                        <p class="text-gray-600">Isi formulir di bawah ini dan kami akan merespons dalam 24 jam.</p>
-                    </div>
-                    <div class="p-6">
-                        @if(session('success'))
-                            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-6">
-                                {{ session('success') }}
-                            </div>
-                        @endif
-
-                        <form method="POST" action="{{ route('contact.send') }}" class="space-y-6">
-                            @csrf
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div>
-                                    <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap *</label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        value="{{ old('name') }}"
-                                        placeholder="Masukkan nama lengkap"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-500 @enderror"
-                                        required
-                                    >
-                                    @error('name')
-                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                                <div>
-                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email *</label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value="{{ old('email') }}"
-                                        placeholder="nama@email.com"
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('email') border-red-500 @enderror"
-                                        required
-                                    >
-                                    @error('email')
-                                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div>
-                                <label for="category" class="block text-sm font-medium text-gray-700 mb-2">Kategori Pertanyaan</label>
-                                <select name="category" id="category" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                                    <option value="">Pilih kategori</option>
-                                    <option value="general" {{ old('category') == 'general' ? 'selected' : '' }}>Pertanyaan Umum</option>
-                                    <option value="order" {{ old('category') == 'order' ? 'selected' : '' }}>Pemesanan</option>
-                                    <option value="technical" {{ old('category') == 'technical' ? 'selected' : '' }}>Bantuan Teknis</option>
-                                    <option value="partnership" {{ old('category') == 'partnership' ? 'selected' : '' }}>Kerjasama</option>
-                                    <option value="complaint" {{ old('category') == 'complaint' ? 'selected' : '' }}>Keluhan</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Subjek *</label>
-                                <input
-                                    type="text"
-                                    id="subject"
-                                    name="subject"
-                                    value="{{ old('subject') }}"
-                                    placeholder="Subjek pesan Anda"
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('subject') border-red-500 @enderror"
-                                    required
-                                >
-                                @error('subject')
-                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Pesan *</label>
-                                <textarea
-                                    id="message"
-                                    name="message"
-                                    rows="5"
-                                    placeholder="Tulis pesan Anda di sini..."
-                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('message') border-red-500 @enderror"
-                                    required
-                                >{{ old('message') }}</textarea>
-                                @error('message')
-                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                @enderror
-                            </div>
-
-                            <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg font-medium transition-colors flex items-center justify-center">
-                                <i data-lucide="send" class="mr-2 h-5 w-5"></i>
-                                Kirim Pesan
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Map & Additional Info -->
-            <div class="space-y-6">
-                <!-- Map Placeholder -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <div class="h-64 bg-gray-200 flex items-center justify-center">
-                        <div class="text-center text-gray-500">
-                            <i data-lucide="map-pin" class="h-12 w-12 mx-auto mb-2"></i>
-                            <p>Peta Lokasi Kantor</p>
-                            <p class="text-sm">Jl. Sudirman No. 123, Jakarta Pusat</p>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-semibold mb-2">Kunjungi Kantor Kami</h3>
-                        <p class="text-gray-600 text-sm mb-4">
-                            Anda dapat mengunjungi kantor kami untuk konsultasi langsung atau melihat koleksi buku fisik.
-                        </p>
-                        <button class="w-full border border-gray-300 hover:bg-gray-50 py-2 rounded-lg font-medium transition-colors flex items-center justify-center">
-                            <i data-lucide="map-pin" class="mr-2 h-4 w-4"></i>
-                            Lihat di Google Maps
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Quick Contact -->
-                <div class="bg-white rounded-lg shadow-md">
-                    <div class="p-6 border-b">
-                        <h3 class="text-xl font-bold">Kontak Cepat</h3>
-                    </div>
-                    <div class="p-6 space-y-4">
-                        <a href="tel:02112345678" class="w-full border border-gray-300 hover:bg-gray-50 py-3 rounded-lg font-medium transition-colors flex items-center">
-                            <i data-lucide="phone" class="mr-2 h-4 w-4"></i>
-                            Telepon: (021) 1234-5678
-                        </a>
-                        <a href="https://wa.me/6281234567890" class="w-full border border-gray-300 hover:bg-gray-50 py-3 rounded-lg font-medium transition-colors flex items-center">
-                            <i data-lucide="message-circle" class="mr-2 h-4 w-4"></i>
-                            WhatsApp: +62 812-3456-7890
-                        </a>
-                        <a href="mailto:info@sabajayapress.com" class="w-full border border-gray-300 hover:bg-gray-50 py-3 rounded-lg font-medium transition-colors flex items-center">
-                            <i data-lucide="mail" class="mr-2 h-4 w-4"></i>
-                            Email: info@sabajayapress.com
-                        </a>
-                    </div>
-                </div>
+    <div class="container mx-auto max-w-6xl">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <!-- Google Maps Embed -->
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.7417375569454!2d106.82715311526172!3d-6.170233095531308!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f5d2ad8f8ab9%3A0xbad45612a410b429!2sJl.%20Sudirman%20No.123%2C%20Jakarta%20Pusat!5e0!3m2!1sen!2sid!4v1719412345678"
+                width="100%"
+                height="450"
+                style="border:0;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="w-full h-[450px]">
+            </iframe>
+            <div class="p-6">
+                <h3 class="text-2xl font-semibold mb-2">Kantor Kami</h3>
+                <p class="text-gray-600">
+                    Jl. Sudirman No. 123, Jakarta Pusat — Silakan kunjungi kami untuk konsultasi atau pembelian langsung.
+                </p>
             </div>
         </div>
     </div>
 </section>
+
+
 
 <!-- FAQ Section -->
 <section class="py-20 px-4 bg-white">
