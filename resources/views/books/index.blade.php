@@ -91,7 +91,7 @@
                                     <i data-lucide="book" class="h-16 w-16 text-gray-400"></i>
                                 </div>
                             @endif
-                            @if($book->type == 'digital')
+                            @if($book->book_type == 'digital')
                                 <div class="absolute top-2 left-2">
                                     <span class="bg-blue-500 text-white text-xs px-2 py-1 rounded">Digital</span>
                                 </div>
