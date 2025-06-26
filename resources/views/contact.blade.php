@@ -146,10 +146,12 @@
 
         <div class="text-center mt-12">
             <p class="text-gray-600 mb-4">Tidak menemukan jawaban yang Anda cari?</p>
-            <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center mx-auto">
-                <i data-lucide="message-circle" class="mr-2 h-4 w-4"></i>
-                Hubungi Customer Service
-            </button>
+            <a href="https://wa.me/6287739964722" target="_blank"
+   class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-medium transition-colors flex items-center mx-auto">
+    <i data-lucide="message-circle" class="mr-2 h-4 w-4"></i>
+    Hubungi Customer Service
+</a>
+
         </div>
     </div>
 </section>
