@@ -64,9 +64,8 @@ class BookResource extends Resource
                             ->columnSpanFull(),
                     ]),
 
-                Forms\Components\Section::make('Detail Fisik')
+                Forms\Components\Section::make('Detail')
                     ->columns(3)
-                    ->hidden(fn (Forms\Get $get) => $get('book_type') !== 'fisik')
                     ->schema([
                         Forms\Components\TextInput::make('isbn')
                             ->label('ISBN')
@@ -78,9 +77,11 @@ class BookResource extends Resource
                         Forms\Components\TextInput::make('weight')
                             ->numeric()
                             ->minValue(1)
+                            ->hidden(fn (Forms\Get $get) => $get('book_type') !== 'fisik')
                             ->suffix('gram'),
                         Forms\Components\TextInput::make('dimensions')
                             ->placeholder('Contoh: 15x23 cm')
+                            ->hidden(fn (Forms\Get $get) => $get('book_type') !== 'fisik')
                             ->maxLength(20),
                     ]),
 
