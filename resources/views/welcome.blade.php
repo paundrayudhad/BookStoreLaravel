@@ -58,6 +58,13 @@
 <!-- Features Section -->
 <section class="py-16 px-4 bg-white">
     <div class="container mx-auto">
+        <!-- Judul dan Pengantar -->
+        <div class="mb-12 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 mb-4">Mengapa Belanja di Sabajaya?</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">Kami hadir untuk memberikan pengalaman belanja buku terbaik — cepat, aman, dan lengkap. Berikut alasan mengapa Sabajaya menjadi pilihan tepat untuk kebutuhan bacaan Anda:</p>
+        </div>
+
+        <!-- Fitur -->
         <div class="grid md:grid-cols-3 gap-8">
             <div class="text-center space-y-4">
                 <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto">
@@ -83,6 +90,7 @@
         </div>
     </div>
 </section>
+
 
 <!-- Latest Books Section -->
 @if($latestBooks->count() > 0)
