@@ -79,7 +79,7 @@
         <!-- Stock Info -->
             <div class="text-xs text-gray-500">
                 @if($book->stock > 0)
-                    Stok: {{ $book->stock }} tersedia
+                    Stok: {{ $book->stock }} Tersedia
                 @else
                     <span class="text-red-500">Stok habis</span>
                 @endif
@@ -88,7 +88,7 @@
         <!-- Action Button -->
         <div class="pt-2">
             <button onclick="viewBookDetail('{{ $book->id }}')" 
-                   class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center space-x-2 {{ $book->book_type === 'fisik' && $book->stock <= 0 ? 'opacity-50 cursor-not-allowed' : '' }}"
+                   class="w-full bg-orange-500 hover:bg-orange-600 text-white py-2.5 px-4 rounded-lg font-medium transition-colors duration-200 flex items-center justify-center space-x-2 {{ $book->stock <= 0 ? 'opacity-50 cursor-not-allowed' : '' }}"
                    {{ $book->stock <= 0 ? 'disabled' : '' }}>
                 <i data-lucide="shopping-cart" class="h-4 w-4"></i>
                 <span>Lihat Detail</span>
